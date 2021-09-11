@@ -7,19 +7,11 @@ const bcrypt = require('bcrypt');
  const loginAuth = async (req, res) => {
     
     const user = await User.findOne({email:req.body.email})
-
-    // console.log(user);
-    // console.log('db email je ' +user.email);
-    // console.log('db password je '+user.password)
-    // console.log('req email je' +req.body.email);
-    // console.log('req password je ' +req.body.password)
   
     if(user){
       const auth = await bcrypt.compare(req.body.password, user.password);
-      // console.log('Auth je '+ auth)
 
       if (auth) {
-        
         
         jwt.sign({user}, process.env.JWT_KEY, { expiresIn: '400s' }, (err, token) => {
           res.json({
@@ -37,7 +29,7 @@ const bcrypt = require('bcrypt');
     
   };
 
-
+  //VERIFY TOKEN
   function verifyToken(req, res, next) {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
@@ -50,7 +42,6 @@ const bcrypt = require('bcrypt');
       next()
     })
   }
-
 
   module.exports = 
   {
