@@ -1,9 +1,5 @@
 const Movie = require('../models/movieModel');
 
-
-
-
-
 //GET ALL MOVIES
 const get_all_movies = (req, res) => {
     console.log(req.body)
@@ -16,15 +12,17 @@ const get_all_movies = (req, res) => {
 
   };
 
-//================================================================
+
 
  //POST NEW MOVIE
 const post_new_movie = async (req, res) => {
   
     //CHECK IF MOVIE ALREADY EXISTS IN DB
-    const movie = await Movie.exists({ title: req.body.title })
-      console.log(req.body)
-      //if user not in db, add it
+    const movie = await Movie.exists({ title: req.body.title})
+    .catch(err => console.log(err));
+    
+      
+      console.log(movie)
       if (movie == false) {
         const post_new_movie = new Movie({
             
@@ -46,7 +44,7 @@ const post_new_movie = async (req, res) => {
       }
     
   };
-//===============================================================
+
 
   //UPDATE MOVIE
   const update_movie = async (req, res) => {
@@ -59,7 +57,7 @@ const post_new_movie = async (req, res) => {
    })
    return res.send(movie);
   }
-  //==========================================================
+ 
 
   //DELETE MOVIE
   const delete_movie = (req, res) => {
@@ -74,8 +72,6 @@ const post_new_movie = async (req, res) => {
         });
 };
 
-//============================================================
-  //export controller
 module.exports =
 {
     get_all_movies, 

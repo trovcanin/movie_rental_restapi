@@ -1,7 +1,7 @@
 const Client = require('../models/clientModel');
 
 
-//GET ALL MOVIES
+//GET ALL CLIENTS
 const get_all_clients = (req, res) => {
     
     Client.find({}, (err, data) => {
@@ -15,7 +15,7 @@ const get_all_clients = (req, res) => {
 
 //================================================================
 
- //POST NEW MOVIE
+ //CREATE NEW CLIENT
 const create_new_client = async (req, res) => {
   
     //CHECK IF MOVIE ALREADY EXISTS IN DB
@@ -30,7 +30,7 @@ const create_new_client = async (req, res) => {
             movies_rented:[]
           
         });
-  
+        
         // SAVE TO DB
         create_new_client.save((err, data) => {
           if (err) return res.json("Something is wrong. Please check.");
@@ -42,9 +42,8 @@ const create_new_client = async (req, res) => {
       }
     
   };
-//===============================================================
 
-  //UPDATE MOVIE
+  //UPDATE CLIENT
   const update_client = async (req, res) => {
 
    const customer = await Client.findByIdAndUpdate(req.params.name, {
@@ -54,9 +53,8 @@ const create_new_client = async (req, res) => {
    })
    return res.send(customer);
   }
-  //==========================================================
-
-  //DELETE MOVIE
+  
+  //DELETE CLIENT
   const delete_client = (req, res) => {
     
     Client.findOneAndRemove({_id: req.params.name}, function(err,data)
