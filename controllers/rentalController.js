@@ -13,16 +13,10 @@ client_id = req.body.client_id;
 const movie_found = await Movie.findOne({_id:id})
     .catch(err => res.send('We dont have this one, sorry!'))
 
-    console.log(movie_found);
-    console.log(movie_found.quantity)
-    console.log(movie_found.title)
-
-const client = await Client.findOne({_id:client_id})
+    const client = await Client.findOne({_id:client_id})
     .catch(err=> console.log('No client under this id in our database'))
 
-    console.log('Client je '+ client)
-
-// IF MOVIE quantity> 0 , RENT, ELSE, DON'T RENT
+    // IF MOVIE quantity> 0 , RENT, ELSE, DON'T RENT
 if(movie_found.quantity > 0 && client !== undefined)
 {
     const create_new_rental = new Rental
@@ -66,7 +60,20 @@ else {
     }
 }
 
+//GET ALL RENTED MOVIES
+const get_all_rented_movies = (req, res) => {
+    
+    Rental.find({}, (err, data) => {
+      if (err) {
+        return res.json("Something is wrong. Please contact admin.");
+      }
+      return res.json(data);
+    });
+
+  };
+
 module.exports = 
 {
-    create_new_rental
+    create_new_rental,
+    get_all_rented_movies
 }
