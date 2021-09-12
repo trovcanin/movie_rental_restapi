@@ -13,7 +13,7 @@ const bcrypt = require('bcrypt');
 
       if (auth) {
         
-        jwt.sign({user}, process.env.JWT_KEY, { expiresIn: '400s' }, (err, token) => {
+        jwt.sign({user}, process.env.JWT_KEY, { expiresIn: '400000s' }, (err, token) => {
           res.json({
             token
           });
