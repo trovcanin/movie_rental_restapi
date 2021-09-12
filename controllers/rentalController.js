@@ -60,7 +60,7 @@ if(movie_found.quantity > 0 && client !== undefined)
 }
 
 else {
-    res.send('Currently we have 0 copies or we dont have that movie, sorry');
+    console.log('Currently we have 0 copies or we dont have that movie, sorry');
     }
 }
 
