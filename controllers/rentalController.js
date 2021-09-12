@@ -29,8 +29,12 @@ if(movie_found.quantity > 0 && client !== undefined)
      });
     
         create_new_rental.save((err, data) => {
-            if (err) return res.json("Something is wrong. Please check.");
-              return res.json(data);
+            if (err) { 
+              console.log(err)
+              return res.json("Something is wrong. Please check.")
+            }
+            console.log(data)
+            return res.json(data);
         })
 
         // push rented movie to movies_rented array for each client
