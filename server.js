@@ -12,6 +12,7 @@ const app = express();
 //middleware
 app.use(express.json()); 
 app.use(movies, users, clients, rental);
+app.use(express.static(__dirname + '/public'));
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -20,9 +21,7 @@ mongoose
 
 
 app.get('/', (req, res) => {
-    res.send(
-      'Hi, welcome to Movie Rental Api.'
-    );
+  res.sendFile(__dirname + '/index.html')
   });
 
   app.post('/api/login', loginAuth );

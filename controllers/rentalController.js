@@ -11,10 +11,10 @@ client_id = req.body.client_id;
 
 
 const movie_found = await Movie.findOne({_id:id})
-    .catch(err => res.send('We dont have this one, sorry!'))
+    .catch(err => res.status(400).send('We dont have this one, sorry!'))
 
     const client = await Client.findOne({_id:client_id})
-    .catch(err=> console.log('No client under this id in our database'))
+    .catch(err=> res.status(400).send('No client under this id in our database'))
 
     // IF MOVIE quantity> 0 , RENT, ELSE, DON'T RENT
 if(movie_found.quantity > 0 && client !== undefined)
@@ -30,7 +30,7 @@ if(movie_found.quantity > 0 && client !== undefined)
     
         create_new_rental.save((err, data) => {
             if (err) { 
-              console.log(err)
+              res.send(err)
               return res.json("Something is wrong. Please check.")
             }
             console.log(data)
