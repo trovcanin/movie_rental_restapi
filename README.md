@@ -1,3 +1,5 @@
+Real movie rental REST API with users, clients, movies and rentals
+
 How to use it?
 
 CLIENT ROUTE
